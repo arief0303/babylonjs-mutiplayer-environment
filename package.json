@@ -1,6 +1,6 @@
 {
-  "name": "babylonjs-vue-env",
-  "version": "0.0.0",
+  "name": "babylonjs-multiplayer-environment",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -15,7 +15,7 @@
     "babylonjs": "^6.2.0",
     "babylonjs-charactercontroller": "^0.4.4-alpha.7",
     "babylonjs-loaders": "^6.2.0",
-    "colyseus.js": "^0.14.13",
+    "colyseus.js": "0.15.0-preview.4",
     "stats-js": "^1.0.1",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
