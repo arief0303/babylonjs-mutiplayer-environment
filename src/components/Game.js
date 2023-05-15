@@ -47,11 +47,7 @@ export default {
             await loadPlayer(scene, engine, canvas);
 
             // create a light
-            const light = new BABYLON.HemisphericLight(
-                'light',
-                new BABYLON.Vector3(0, 1, 0),
-                scene
-            )
+            scene.createDefaultLight(true);
 
             async function loadMap(map) {
                 engine.displayLoadingUI();
@@ -117,7 +113,7 @@ export default {
                             var camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", alpha, beta, 5, target, scene);
                             //standard camera setting
                             camera.wheelPrecision = 15;
-                            camera.checkCollisions = false;
+                            camera.checkCollisions = true;
                             //make sure the keyboard keys controlling camera are different from those controlling player
                             //here we will not use any keyboard keys to control camera
                             camera.keysLeft = [];
@@ -127,7 +123,7 @@ export default {
                             //how close can the camera come to player
                             camera.lowerRadiusLimit = 2;
                             //how far can the camera go from the player
-                            camera.upperRadiusLimit = 20;
+                            camera.upperRadiusLimit = 10;
                             camera.attachControl(canvas, false);
 
                             //var CharacterController = org.ssatguru.babylonjs.component.CharacterController;
@@ -138,7 +134,7 @@ export default {
                             cc.setCameraTarget(new BABYLON.Vector3(0, 1.5, 0));
                             cc.setCameraElasticity(false);
                             //if the camera comes close to the player we want to enter first person mode.
-                            cc.setNoFirstPerson(false);
+                            cc.setNoFirstPerson(true);
                             //the height of steps which the player can climb
                             cc.setStepOffset(0.4);
                             //the minimum and maximum slope the player can go up
