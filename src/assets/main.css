@@ -1,4 +1,7 @@
 @import './base.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 #app {
   max-width: 1280px;
@@ -32,4 +35,58 @@ a,
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
+}
+
+@layer base {
+  @font-face {
+    font-family: 'Rajdhani';
+    font-weight: 400;
+    src: url('fonts/Rajdhani-Regular.ttf');
+  }
+  @font-face {
+    font-family: 'Rajdhani';
+    font-weight: 600;
+    src: url('fonts/Rajdhani-SemiBold.ttf');
+  }
+  @font-face {
+    font-family: 'Rajdhani';
+    font-weight: 700;
+    src: url('fonts/Rajdhani-Bold.ttf');
+  }
+
+  body {
+    overscroll-behavior: none;
+    background-color: #2D2D49;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+   
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background-color: #2D2D49;
+    border-radius: 10px;
+  }
+  :focus-visible {
+    outline: none;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+}
+
+body {
+  overflow: hidden;
 }

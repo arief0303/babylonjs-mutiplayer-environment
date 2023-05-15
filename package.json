@@ -14,9 +14,11 @@
     "@vueuse/core": "^10.1.2",
     "babylonjs": "^6.3.1",
     "babylonjs-charactercontroller": "^0.4.4-alpha.7",
+    "babylonjs-gui": "^6.3.1",
     "babylonjs-loaders": "^6.3.1",
     "colyseus.js": "0.15.0-preview.4",
     "stats-js": "^1.0.1",
+    "tailwindcss": "^3.3.2",
     "vue": "^3.3.1",
     "vue-router": "^4.2.0"
   },
