@@ -10,18 +10,6 @@ import CharacterCustomization from './CharacterCustomization';
 import { setupCharacterPack } from './character_customize';
 import PlayerMarker from './PlayerMarker';
 
-var statsFPS = new Stats();
-statsFPS.domElement.style.cssText = "position:absolute;top:3px;left:3px;";
-statsFPS.showPanel(0); // 0: fps,
-
-var statsMemory = new Stats();
-statsMemory.showPanel(2); //2: mb, 1: ms, 3+: custom
-statsMemory.domElement.style.cssText = "position:absolute;top:3px;left:84px;";
-
-//add stats for FPS and Memory usage
-document.body.appendChild(statsFPS.dom);
-document.body.appendChild(statsMemory.dom);
-
 export default {
     setup() {
         const canvas = ref(null);
@@ -30,6 +18,18 @@ export default {
         let box = null;
         let playerEntities = {};
         let playerMarkerEntities = {};
+
+        let statsFPS = new Stats();
+        statsFPS.domElement.style.cssText = "position:absolute;top:3px;left:3px;";
+        statsFPS.showPanel(0); // 0: fps,
+
+        let statsMemory = new Stats();
+        statsMemory.showPanel(2); //2: mb, 1: ms, 3+: custom
+        statsMemory.domElement.style.cssText = "position:absolute;top:3px;left:84px;";
+
+        //add stats for FPS and Memory usage
+        document.body.appendChild(statsFPS.dom);
+        document.body.appendChild(statsMemory.dom);
 
 
         const init = async () => {
