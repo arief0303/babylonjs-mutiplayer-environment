@@ -9,6 +9,7 @@ import * as Colyseus from "colyseus.js";
 import CharacterCustomization from './CharacterCustomization';
 import { setupCharacterPack } from './character_customize';
 import PlayerMarker from './PlayerMarker';
+import Joystick from './Joystick';
 
 export default {
     setup() {
@@ -18,6 +19,7 @@ export default {
         let box = null;
         let playerEntities = {};
         let playerMarkerEntities = {};
+        const isFullscreen = ref(false);
 
         let statsFPS = new Stats();
         statsFPS.domElement.style.cssText = "position:absolute;top:3px;left:3px;";
@@ -63,7 +65,7 @@ export default {
 
             async function loadPlayer(scene, engine, canvas) {
                 // Connect with Colyseus server
-                let client = new Colyseus.Client("ws://localhost:2567");
+                let client = new Colyseus.Client("ws://192.168.31.131:2567");
                 console.log("Connecting to Colyseus server...");
                 let room = await client.joinOrCreate("my_room");
                 console.log("Connected to Colyseus server!");
@@ -160,6 +162,9 @@ export default {
                             cc.setSlideBackAnim("slideBack", 1, false)
                             animationGroups[0].stop(); //stop default animation from playing overlapping with idle anim
                             cc.start();
+
+                            // Setup Joystick
+                            new Joystick(cc);
 
                             // Render loop
                             engine.runRenderLoop(function () {
@@ -264,6 +269,34 @@ export default {
             }
         }
 
+        const toggleFullscreen = () => {
+            isFullscreen.value = !isFullscreen.value;
+
+            if (isFullscreen.value) {
+                // Enter fullscreen mode
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) {
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) {
+                    document.documentElement.msRequestFullscreen();
+                }
+            } else {
+                // Exit fullscreen mode
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        };
+
         const handleResize = () => {
             if (engine) {
                 engine.resize()
@@ -280,7 +313,9 @@ export default {
         })
 
         return {
-            canvas
+            canvas,
+            isFullscreen,
+            toggleFullscreen
         }
     },
 }
