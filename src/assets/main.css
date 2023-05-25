@@ -64,3 +64,28 @@
     -moz-appearance: textfield;
   }
 }
+
+.fullscreen-container {
+  position: relative;
+}
+
+.fullscreen-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+}
+
+.fullscreen-button:hover {
+  background-color: #45a049;
+}
+
+.fullscreen-button:focus {
+  outline: none;
+}

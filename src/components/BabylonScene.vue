@@ -1,3 +1,9 @@
+<template>
+    <canvas ref="canvas"></canvas>
+</template>
+
+<script>
+import { defineComponent } from 'vue'
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useEventListener } from '@vueuse/core'
 import * as BABYLON from 'babylonjs'
@@ -11,7 +17,8 @@ import { setupCharacterPack } from './character_customize';
 import PlayerMarker from './PlayerMarker';
 import Joystick from './Joystick';
 
-export default {
+export default defineComponent({
+    name: 'BabylonScene',
     setup() {
         const canvas = ref(null);
         let engine = null;
@@ -317,4 +324,5 @@ export default {
             toggleFullscreen
         }
     },
-}
+})
+</script>
