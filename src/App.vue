@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script src="./components/Game.js"></script>
+<script src="./components/main.js"></script>
 
 <style>
 .fullscreen-container {
