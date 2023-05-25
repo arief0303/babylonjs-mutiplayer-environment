@@ -16,7 +16,6 @@ export default {
         const canvas = ref(null);
         let engine = null;
         let scene = null;
-        let box = null;
         let playerEntities = {};
         let playerMarkerEntities = {};
         const isFullscreen = ref(false);
@@ -52,7 +51,7 @@ export default {
             scene.createDefaultLight(true);
         }
 
-        async function loadMap(map) {
+        const loadMap = async (map) => {
             engine.displayLoadingUI();
             const importPromise = await BABYLON.SceneLoader.ImportMeshAsync("", "assets/env/", map, scene);
             importPromise.meshes.forEach(m => {
@@ -64,18 +63,18 @@ export default {
             engine.hideLoadingUI();
         }
 
-        async function loadPlayer(scene, engine, canvas) {
+        const loadPlayer = async (scene, engine, canvas) => {
             // Connect with Colyseus server
             let client = new Colyseus.Client("wss://bitaverse-server.immortal-universe.com:80");
             console.log("Connecting to Colyseus server...");
             let room = await client.joinOrCreate("my_room");
             console.log("Connected to Colyseus server!");
             room.state.players.onAdd((playerSocket, sessionId) => {
-                var isCurrentPlayer = (sessionId === room.sessionId);
+                let isCurrentPlayer = (sessionId === room.sessionId);
                 // console.log("New player joined with sessionId:", sessionId);
                 if (isCurrentPlayer) {
                     BABYLON.SceneLoader.ImportMesh("", "assets/player/", "chara_full.glb", scene, (meshes, particleSystems, skeletons, animationGroups) => {
-                        var player = meshes[0];
+                        let player = meshes[0];
                         player.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
                         player.position = new BABYLON.Vector3(0, 0, 0);
                         player.checkCollisions = true;
@@ -83,7 +82,7 @@ export default {
                         player.ellipsoidOffset = new BABYLON.Vector3(0, 1, 0);
                         player.rotation = player.rotationQuaternion.toEulerAngles();
                         player.rotationQuaternion = null;
-                        var skeleton = skeletons[0];
+                        let skeleton = skeletons[0];
                         player.skeleton = skeleton;
                         skeleton.enableBlending(0.1);
                         let characterCustomization = CharacterCustomization.getInstance();
@@ -110,10 +109,10 @@ export default {
                         //if the skeleton does not have any animation ranges then set them as below
                         // setAnimationRanges(skeleton);
                         //rotate the camera behind the player
-                        var alpha = -player.rotation.y - 4.69;
-                        var beta = Math.PI / 2.5;
-                        var target = new BABYLON.Vector3(player.position.x, player.position.y + 1.5, player.position.z);
-                        var camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", alpha, beta, 5, target, scene);
+                        let alpha = -player.rotation.y - 4.69;
+                        let beta = Math.PI / 2.5;
+                        let target = new BABYLON.Vector3(player.position.x, player.position.y + 1.5, player.position.z);
+                        let camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", alpha, beta, 5, target, scene);
                         //standard camera setting
                         camera.wheelPrecision = 15;
                         camera.checkCollisions = true;
@@ -130,7 +129,7 @@ export default {
                         camera.attachControl(canvas, false);
 
                         //var CharacterController = org.ssatguru.babylonjs.component.CharacterController;
-                        var cc = new CharacterController(player, camera, scene, myAgmap);
+                        let cc = new CharacterController(player, camera, scene, myAgmap);
                         cc.setTurningOff(true);
                         //below makes the controller point the camera at the player head which is approx
                         //1.5m above the player origin
