@@ -171,23 +171,49 @@ export default defineComponent({
                         // const joystick = new JoystickController({}, (data) => console.log(data));
                         const joystick = new JoystickController(
                             {
-                              maxRange: 70,
-                              level: 10,
-                              radius: 50,
-                              joystickRadius: 30,
-                              opacity: 0.5,
-                              leftToRight: false,
-                              bottomToUp: true,
-                              containerClass: "joystick-container",
-                              controllerClass: "joystick-controller",
-                              joystickClass: "joystick",
-                              distortion: true,
-                              x: "25%",
-                              y: "25%",
+                                maxRange: 70,
+                                level: 10,
+                                radius: 50,
+                                joystickRadius: 30,
+                                opacity: 0.5,
+                                leftToRight: false,
+                                bottomToUp: true,
+                                containerClass: "joystick-container",
+                                controllerClass: "joystick-controller",
+                                joystickClass: "joystick",
+                                distortion: true,
+                                x: "25%",
+                                y: "25%",
                             },
-                            ({ x, y, leveledX, leveledY, distance, angle }) =>
-                              console.log(x, y, leveledX, leveledY, distance, angle)
-                          );
+                            ({ x, y, leveledX, leveledY, distance, angle }) => {
+                                console.log(x, y, leveledX, leveledY, distance, angle)
+                                if (y > 45) {
+                                    cc.walk(true)
+                                }
+
+                                if (y <= -45) {
+                                    cc.walkBack(true);
+                                }
+
+                                if (y > -45 && y <= 45) {
+                                    cc.walk(false)
+                                    cc.walkBack(false);
+                                }
+
+                                if (x > 40) {
+                                    cc.turnRight(true);
+                                }
+                                if (x < -40) {
+                                    cc.turnLeft(true);
+                                }
+
+                                if (x <= 40 && x > -40) {
+                                    cc.turnLeft(false);
+                                    cc.turnRight(false);
+                                }
+                            }
+
+                        );
 
                         // Render loop
                         engine.runRenderLoop(function () {
