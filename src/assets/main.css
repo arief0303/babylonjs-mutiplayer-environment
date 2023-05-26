@@ -66,10 +66,10 @@
 }
 
 .fullscreen-container {
-  position: relative;
+  position: absolute;
 }
 
-.fullscreen-button {
+/* .fullscreen-button {
   padding: 10px 20px;
   background-color: #4CAF50;
   color: #fff;
@@ -88,4 +88,23 @@
 
 .fullscreen-button:focus {
   outline: none;
+} */
+
+/* .joystick-container {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .joystick-container {
+    display: block;
+  }
+} */
+
+.joystick-container {
+  display: block;
+}
+
+.joystick-container.show {
+  display: block;
+  position: absolute;
 }
