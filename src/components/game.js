@@ -181,7 +181,7 @@ export default defineComponent({
                                 containerClass: "joystick-container",
                                 controllerClass: "joystick-controller",
                                 joystickClass: "joystick",
-                                distortion: true,
+                                distortion: false,
                                 x: "25%",
                                 y: "25%",
                             },
@@ -215,6 +215,13 @@ export default defineComponent({
 
                         );
 
+                        let isMobile = /(iPhone|Android|BlackBerry|Windows Phone)/i.test(navigator.userAgent);
+
+                        if (isMobile) {
+                            document.querySelector('.joystick-container').style.display = 'block';
+                            document.querySelector('.joystick-controller').style.display = 'block';
+                            document.querySelector('.joystick').style.display = 'block';
+                        }
                         // Render loop
                         engine.runRenderLoop(function () {
                             myPlayerMarker.setPosition(player.position.x, player.position.y + 2.25, player.position.z); // keep track of myPlayer.mesh marker

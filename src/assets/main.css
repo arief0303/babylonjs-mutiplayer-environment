@@ -101,10 +101,26 @@
 } */
 
 .joystick-container {
-  display: block;
+  display: none;
+}
+
+.joystick-controller {
+  display: none;
+}
+
+.joystick {
+  display: none;
+  rotate: 0;
 }
 
 .joystick-container.show {
   display: block;
-  position: absolute;
+}
+
+.joystick-controller.show {
+  display: block;
+}
+
+.joystick.show {
+  display: block;
 }
