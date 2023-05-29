@@ -18,6 +18,8 @@ export default {
         let scene = null;
         let playerEntities = {};
         let playerMarkerEntities = {};
+        let player = null;
+        let otherPlayer = null;
         const isFullscreen = ref(false);
 
         let statsFPS = new Stats();
@@ -74,7 +76,7 @@ export default {
                 // console.log("New player joined with sessionId:", sessionId);
                 if (isCurrentPlayer) {
                     BABYLON.SceneLoader.ImportMesh("", "assets/player/", "chara_full.glb", scene, (meshes, particleSystems, skeletons, animationGroups) => {
-                        let player = meshes[0];
+                        player = meshes[0];
                         player.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
                         player.position = new BABYLON.Vector3(0, 0, 0);
                         player.checkCollisions = true;
@@ -198,7 +200,7 @@ export default {
                         // A player has joined!
                         //
                         console.log("A player has joined! Their unique session id is", sessionId);
-                        let otherPlayer = meshes[0];
+                        otherPlayer = meshes[0];
                         let otherPlayerMarker = new PlayerMarker(scene, sessionId);
                         otherPlayerMarker.setPosition(otherPlayer.position.x, otherPlayer.position.y + 2.25, otherPlayer.position.z);
                         otherPlayer.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
@@ -248,6 +250,7 @@ export default {
                                 playerMarkerEntities[sessionId].setPosition(playerSocket.x, playerSocket.y + 2.25, playerSocket.z);
                             }
                         });
+                        // playerSocket.
                     });
                 }
                 // 
